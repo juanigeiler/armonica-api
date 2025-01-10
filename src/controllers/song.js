@@ -42,6 +42,15 @@ const deleteSong = async (req, res) => {
     try {
         const song = await Song.findById(req.params.id);
         if (!song) return res.status(404).json({ error: 'Song not found' });
+
+        const artist = await Artist.findById(song.artist);
+        if (!artist) return res.status(404).json({ error: 'Artist not found' });
+
+        if (artist) {
+            artist.songs = artist.songs.filter(songId => songId.toString() !== req.params.id);
+            await artist.save();
+        }
+
         await song.deleteOne();
         res.status(204).json({ message: 'Song deleted successfully', artistId: req.params.id });
     } catch (err) {
