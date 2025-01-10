@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    container_name: armonica-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/src
+      - /app/node_modules
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/armonica
+    depends_on:
+      - mongo
+    command: nodemon src/app.js
+  mongo:
+    image: mongo:6
+    container_name: armonica-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+volumes:
+  mongodb_data:
