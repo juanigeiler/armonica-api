@@ -28,16 +28,6 @@ const addSong = async (req, res) => {
     }
 };
 
-const getSongById = async (req, res) => {
-    try {
-        const song = await Song.findById(req.params.id).populate('artist');
-        if (!song) return res.status(404).json({ error: 'Song not found' });
-        res.json(song);
-    } catch (err) {
-        res.status(500).json({ error: 'Error fetching song' });
-    }
-};
-
 const deleteSong = async (req, res) => {
     try {
         const song = await Song.findById(req.params.id);
@@ -58,9 +48,29 @@ const deleteSong = async (req, res) => {
     }
 };
 
+const updateSong = async (req, res) => {
+
+    try {
+        const { title, album, tabs } = req.body;
+
+        const song = await Song.findById(req.params.id);
+        if (!song) return res.status(404).json({ error: 'Artist not found' });
+    
+        song.title = title;
+        song.album = album;
+        song.tabs = tabs;
+
+        const updatedSong = await song.save();
+        res.json(updatedSong);
+    } catch (error) {
+      console.error("Error updating artist:", error);
+      res.status(500).json({ error: "Internal server error." });
+    }
+};
+
 module.exports = {
     getSongs,
     addSong,
-    getSongById,
-    deleteSong
+    deleteSong,
+    updateSong
 };

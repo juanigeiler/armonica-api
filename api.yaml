@@ -4,7 +4,7 @@ info:
   description: API for managing artists and their songs.
   version: 1.0.0
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:8000
     description: Local server
 
 paths:
@@ -68,6 +68,39 @@ paths:
           description: Artist not found
         '500':
           description: Server error
+
+    put:
+      summary: Update an artist
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the artist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Los Piojos
+                genre:
+                  type: string
+                  example: Rock
+      responses:
+        '201':
+          description: Artist updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '400':
+          description: Invalid request
+
     delete:
       summary: Delete an artist by ID
       parameters:
@@ -155,8 +188,9 @@ paths:
           description: Invalid request
 
   /songs/{id}:
-    get:
-      summary: Get a song by ID
+
+    put:
+      summary: Update a song
       parameters:
         - name: id
           in: path
@@ -164,17 +198,32 @@ paths:
           schema:
             type: string
           description: The ID of the song
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: El Farolito
+                album:
+                  type: string
+                  example: Azul
+                tabs:
+                  type: string
+                  example: C-G-Am-F
       responses:
-        '200':
-          description: Song details
+        '201':
+          description: Song updated successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Song'
-        '404':
-          description: Song not found
-        '500':
-          description: Server error
+        '400':
+          description: Invalid request
+
     delete:
       summary: Delete a song by ID
       parameters:
