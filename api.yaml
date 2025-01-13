@@ -171,9 +171,18 @@ paths:
                 album:
                   type: string
                   example: Azul
+                key:
+                  type: string
+                  example: C
+                difficulty:
+                  type: number
+                  example: 3
+                spotify_url:
+                  type: string
+                  example: https://open.spotify.com/intl-es/track/7LOkbiMpnZYbybdWuv7S4U?si=b740d3379d604737
                 tabs:
                   type: string
-                  example: C-G-Am-F
+                  example: 4 5 4 (6) 4
                 artistId:
                   type: string
                   description: ID of the artist
@@ -211,6 +220,15 @@ paths:
                 album:
                   type: string
                   example: Azul
+                key:
+                  type: string
+                  example: C
+                difficulty:
+                  type: number
+                  example: 3
+                spotify_url:
+                  type: string
+                  example: https://open.spotify.com/intl-es/track/7LOkbiMpnZYbybdWuv7S4U?si=b740d3379d604737
                 tabs:
                   type: string
                   example: C-G-Am-F
@@ -264,6 +282,12 @@ components:
         title:
           type: string
         album:
+          type: string
+        key:
+          type: string
+        difficulty:
+          type: number
+        spotify_url:
           type: string
         tabs:
           type: string
