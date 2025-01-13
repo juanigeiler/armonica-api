@@ -1,0 +1,295 @@
+openapi: 3.0.0
+info:
+  title: Armonica API
+  description: API for managing artists and their songs.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local server
+
+paths:
+  /artists:
+    get:
+      summary: Get all artists
+      responses:
+        '200':
+          description: List of all artists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Artist'
+        '500':
+          description: Server error
+    post:
+      summary: Add a new artist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Los Piojos
+                genre:
+                  type: string
+                  example: Rock
+      responses:
+        '201':
+          description: Artist created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '400':
+          description: Invalid request
+
+  /artists/{id}:
+    get:
+      summary: Get an artist by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the artist
+      responses:
+        '200':
+          description: Artist details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '404':
+          description: Artist not found
+        '500':
+          description: Server error
+
+    put:
+      summary: Update an artist
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the artist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Los Piojos
+                genre:
+                  type: string
+                  example: Rock
+      responses:
+        '201':
+          description: Artist updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artist'
+        '400':
+          description: Invalid request
+
+    delete:
+      summary: Delete an artist by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the artist
+      responses:
+        '204':
+          description: Artist deleted successfully
+        '404':
+          description: Artist not found
+        '500':
+          description: Server error
+
+  /artists/{id}/songs:
+    get:
+      summary: Get all songs for an artist
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the artist
+      responses:
+        '200':
+          description: List of songs for the artist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Song'
+        '404':
+          description: Artist not found
+        '500':
+          description: Server error
+
+  /songs:
+    get:
+      summary: Get all songs
+      responses:
+        '200':
+          description: List of all songs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Song'
+        '500':
+          description: Server error
+    post:
+      summary: Add a new song
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: El Farolito
+                album:
+                  type: string
+                  example: Azul
+                key:
+                  type: string
+                  example: C
+                difficulty:
+                  type: number
+                  example: 3
+                spotify_url:
+                  type: string
+                  example: https://open.spotify.com/intl-es/track/7LOkbiMpnZYbybdWuv7S4U?si=b740d3379d604737
+                tabs:
+                  type: string
+                  example: 4 5 4 (6) 4
+                artistId:
+                  type: string
+                  description: ID of the artist
+      responses:
+        '201':
+          description: Song created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Song'
+        '400':
+          description: Invalid request
+
+  /songs/{id}:
+
+    put:
+      summary: Update a song
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the song
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: El Farolito
+                album:
+                  type: string
+                  example: Azul
+                key:
+                  type: string
+                  example: C
+                difficulty:
+                  type: number
+                  example: 3
+                spotify_url:
+                  type: string
+                  example: https://open.spotify.com/intl-es/track/7LOkbiMpnZYbybdWuv7S4U?si=b740d3379d604737
+                tabs:
+                  type: string
+                  example: C-G-Am-F
+      responses:
+        '201':
+          description: Song updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Song'
+        '400':
+          description: Invalid request
+
+    delete:
+      summary: Delete a song by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the song
+      responses:
+        '204':
+          description: Song deleted successfully
+        '404':
+          description: Song not found
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Artist:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        genre:
+          type: string
+        songs:
+          type: array
+          items:
+            type: string
+    Song:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        album:
+          type: string
+        key:
+          type: string
+        difficulty:
+          type: number
+        spotify_url:
+          type: string
+        tabs:
+          type: string
+        artist:
+          type: string

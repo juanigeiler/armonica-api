@@ -56,10 +56,29 @@ const deleteArtist = async (req, res) => {
     }
 };
 
+const updateArtist = async (req, res) => {
+
+    try {
+        const { name, genre } = req.body;
+
+        const artist = await Artist.findById(req.params.id);
+        if (!artist) return res.status(404).json({ error: 'Artist not found' });
+    
+        artist.name = name;
+        artist.genre = genre;
+        const updatedArtist = await artist.save();
+        res.json(updatedArtist);
+    } catch (error) {
+      console.error("Error updating artist:", error);
+      res.status(500).json({ error: "Internal server error." });
+    }
+};
+
 module.exports = {
     getArtists,
     getArtistById,
     addArtist,
     getArtistSongs,
-    deleteArtist
+    deleteArtist,
+    updateArtist
 };
