@@ -177,9 +177,9 @@ paths:
                 difficulty:
                   type: number
                   example: 3
-                spotify_url:
+                spotify_song_id:
                   type: string
-                  example: https://open.spotify.com/intl-es/track/7LOkbiMpnZYbybdWuv7S4U?si=b740d3379d604737
+                  example: 7LOkbiMpnZYbybdWuv7S4U
                 tabs:
                   type: string
                   example: 4 5 4 (6) 4
@@ -226,9 +226,9 @@ paths:
                 difficulty:
                   type: number
                   example: 3
-                spotify_url:
+                spotify_song_id:
                   type: string
-                  example: https://open.spotify.com/intl-es/track/7LOkbiMpnZYbybdWuv7S4U?si=b740d3379d604737
+                  example: 7LOkbiMpnZYbybdWuv7S4U
                 tabs:
                   type: string
                   example: C-G-Am-F
@@ -287,7 +287,7 @@ components:
           type: string
         difficulty:
           type: number
-        spotify_url:
+        spotify_song_id:
           type: string
         tabs:
           type: string
