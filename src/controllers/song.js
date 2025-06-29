@@ -51,7 +51,7 @@ const deleteSong = async (req, res) => {
 const updateSong = async (req, res) => {
 
     try {
-        const { title, album, key, difficulty, spotify_url, tabs } = req.body;
+        const { title, album, key, difficulty, spotify_song_id, tabs } = req.body;
 
         const song = await Song.findById(req.params.id);
         if (!song) return res.status(404).json({ error: 'Artist not found' });
@@ -60,7 +60,7 @@ const updateSong = async (req, res) => {
         song.album = album;
         song.key = key;
         song.difficulty = difficulty;
-        song.spotify_url = spotify_url;
+        song.spotify_song_id = spotify_song_id;
         song.tabs = tabs;
 
         const updatedSong = await song.save();
