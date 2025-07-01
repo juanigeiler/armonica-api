@@ -1,8 +1,7 @@
 FROM node:18
 WORKDIR /src
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 COPY . .
-RUN npm install -g nodemon
-EXPOSE 8000
-CMD ["nodemon", "src/app.js"]
+EXPOSE 3000
+CMD ["node", "src/app.js"]

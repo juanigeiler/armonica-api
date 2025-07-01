@@ -1,15 +1,15 @@
 version: '3.8'
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.local
     container_name: armonica-api
     ports:
       - "8000:8000"
     volumes:
       - .:/src
       - /app/node_modules
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/armonica
     env_file:
       - .env
     depends_on:
