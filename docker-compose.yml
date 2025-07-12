@@ -9,7 +9,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/src
-      - /app/node_modules
+      - node_modules:/src/node_modules
     env_file:
       - .env
     depends_on:
@@ -24,3 +24,4 @@ services:
       - mongodb_data:/data/db
 volumes:
   mongodb_data:
+  node_modules:
