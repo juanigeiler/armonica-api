@@ -51,22 +51,23 @@ const deleteSong = async (req, res) => {
 const updateSong = async (req, res) => {
 
     try {
-        const { title, album, key, difficulty, spotify_song_id, tabs } = req.body;
+        const { title, album, key, difficulty, spotify_song_id, youtube_url, tabs } = req.body;
 
         const song = await Song.findById(req.params.id);
-        if (!song) return res.status(404).json({ error: 'Artist not found' });
+        if (!song) return res.status(404).json({ error: 'Song not found' });
     
         song.title = title;
         song.album = album;
         song.key = key;
         song.difficulty = difficulty;
         song.spotify_song_id = spotify_song_id;
+        song.youtube_url = youtube_url;
         song.tabs = tabs;
 
         const updatedSong = await song.save();
         res.json(updatedSong);
     } catch (error) {
-      console.error("Error updating artist:", error);
+      console.error("Error updating song:", error);
       res.status(500).json({ error: "Internal server error." });
     }
 };

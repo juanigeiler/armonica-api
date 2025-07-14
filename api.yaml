@@ -180,6 +180,9 @@ paths:
                 spotify_song_id:
                   type: string
                   example: 7LOkbiMpnZYbybdWuv7S4U
+                youtube_url:
+                  type: string
+                  example: https://www.youtube.com/watch?v=example
                 tabs:
                   type: string
                   example: 4 5 4 (6) 4
@@ -229,6 +232,9 @@ paths:
                 spotify_song_id:
                   type: string
                   example: 7LOkbiMpnZYbybdWuv7S4U
+                youtube_url:
+                  type: string
+                  example: https://www.youtube.com/watch?v=example
                 tabs:
                   type: string
                   example: C-G-Am-F
@@ -288,6 +294,8 @@ components:
         difficulty:
           type: number
         spotify_song_id:
+          type: string
+        youtube_url:
           type: string
         tabs:
           type: string
