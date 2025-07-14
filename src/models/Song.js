@@ -6,6 +6,7 @@ const songSchema = new mongoose.Schema({
   key: { type: String, required: true },
   difficulty: { type: Number, required: true },
   spotify_song_id: { type: String },
+  youtube_url: { type: String },
   tabs: { type: String, required: true },
   artist: { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' },
 });
